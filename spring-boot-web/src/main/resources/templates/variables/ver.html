@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+    <h1 th:text="${titulo}"></h1>
+    <hr>
+    <p>
+        <strong th:text="${paramResult}"></strong>
+    </p>
+    <p>
+        El parametro enviado como texto es: <br>
+        <strong th:text="${paramString}"></strong>
+    </p>
+    <p>
+        El parametro enviado como numero es: <br>
+        <strong th:text="${paramNumero}"></strong>
+    </p>
+</body>
+
+</html>

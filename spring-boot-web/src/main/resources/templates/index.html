@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <!-- Aplicando normaliza en spring boot -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1 class="color-rojo" th:text="${message}"></h1>
+    <hr>
+    <h2 class="color-azul">Usando archivos estaticos con SpringBoot</h2>
+    <br>
+    <img th:src="@{/images/nest-1.jpg}" alt="img">
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+    <h1 th:text="${message}"></h1>
+    <hr>
+    <span>Enviar parametros ala url con Get</span>
+    <br>
+    <ul>
+        <li>
+            <a th:href="@{/v1/api/params/string(texto='Este es un primer parametro')}"><strong>Parametro 1</strong> </a>
+        </li>
+        <li>
+            <a th:href="@{/v1/api/params/string(texto='Este es un segundo parametro')}"><strong>Parametro 2</strong>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/v1/api/params/someParams(saludo='Saludo, varios parametros',numero=7)}"><strong>Varios parametros-Primera forma</strong>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/v1/api/params/someParams2(saludo='Saludo, segunda forma varios parametros,',numero=7)}"><strong>Varios parametros-Segunda forma</strong>
+            </a>
+        </li>
+    </ul>
+</body>
+
+</html>

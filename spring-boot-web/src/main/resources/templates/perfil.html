@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+    <h1>Perfil Usuario: </h1>
+    <hr>
+    <!-- Para acceder a los datos de la instancia de la vista de mvc perfil -->
+    <span>Datos Usuario: </span>
+    <span th:text="${usuario.nombre}"></span>
+    <span th:text="${usuario.apellido}"></span>
+    <br>
+    <br>
+    <span>Email Usuario: </span>
+    <span th:if="${usuario.email}" th:text="${usuario.email}"></span>
+    <span th:if="${usuario.email == null}">El usuario no dispone de Email</span>
+</body>
+</html>
