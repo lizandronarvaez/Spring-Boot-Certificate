@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+    <h1>Formulario con SpringBoot</h1>
+    <hr />
+    <!-- Cuando añadimos la etiqueta th:field debemos añadir en el formulario el objeto al que va a mapear
+        th:object="${modeloUsuario}"
+        th:field="*{campo a mapear del modelo}"
+    -->
+    <form th:action="@{/v1/api/form}" th:object="${usuario}" method="POST">
+        <fieldset>
+            <legend>Datos del usuario</legend>
+            <table>
+                <tr>
+                    <td><label for="id">id</label></td>
+                    <td>
+                        <input type="text" th:field="*{id}" />
+                    </td>
+                    <td>
+                        <!-- Primera forma de validar un formulario a traves de un hasmap -->
+                        <!-- <strong th:if="${error != null && error.containsKey('username')}" th:text="${error.username}"></strong> -->
+                        <!-- Segunda forma de validar un campo de formulario a traves de tymeleaf propio -->
+                        <strong th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="nombre">Nombre</label></td>
+                    <td>
+                        <input type="text" th:field="*{nombre}" placeholder="Introduce un nombre" />
+                    </td>
+                    <td>
+                        <!-- Primera forma de validar un formulario a traves de un hasmap -->
+                        <!-- <strong th:if="${error != null && error.containsKey('username')}" th:text="${error.username}"></strong> -->
+                        <!-- Segunda forma de validar un campo de formulario a traves de tymeleaf propio -->
+                        <strong th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="apellido">Apellido</label></td>
+                    <td>
+                        <input type="text" th:field="*{apellido}" placeholder="Introduce un apellido" />
+                    </td>
+                    <td>
+                        <!-- Primera forma de validar un formulario a traves de un hasmap -->
+                        <!-- <strong th:if="${error != null && error.containsKey('username')}" th:text="${error.username}"></strong> -->
+                        <!-- Segunda forma de validar un campo de formulario a traves de tymeleaf propio -->
+                        <strong th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="username">Nombre Usuario</label></td>
+                    <td>
+                        <input type="text" th:field="*{username}" placeholder="Introduce un nombre" />
+                    </td>
+                    <td>
+                        <!-- Primera forma de validar un formulario a traves de un hasmap -->
+                        <!-- <strong th:if="${error != null && error.containsKey('username')}" th:text="${error.username}"></strong> -->
+                        <!-- Segunda forma de validar un campo de formulario a traves de tymeleaf propio -->
+                        <strong th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></strong>
+                    </td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" th:field="*{password}" placeholder="Introduce el password" /></td>
+                    <td> <!-- <strong th:if="${error != null && error.containsKey('password')}" th:text="${error.password}"></strong> -->
+                        <strong th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></strong>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td> <label for="email">Email</label></td>
+                    <td> <input type="text" th:field="*{email}" placeholder="Introduce un email correcto"></td>
+                    <td> <!-- <strong th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></strong> -->
+                        <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <button type="submit">Registrar</button></td>
+                </tr>
+            </table>
+
+        </fieldset>
+
+    </form>
+
+</body>
+
+</html>

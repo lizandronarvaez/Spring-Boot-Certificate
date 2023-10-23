@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+  </head>
+
+  <body>
+    <h2>Usuarios registrados</h2>
+    <hr />
+    <div>
+      <fieldset>
+        <legend><strong>Usuarios Registrados</strong></legend>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <th>Nº Usuario</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><p th:text="${usuario.id}"></p></td>
+              <td><p th:text="${usuario.nombre}"></p></td>
+              <td><p th:text="${usuario.apellido}"></p></td>
+              <td><p th:text="${usuario.username}"></p></td>
+              <td><p th:text="${usuario.email}"></p></td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+    </div>
+  </body>
+</html>
