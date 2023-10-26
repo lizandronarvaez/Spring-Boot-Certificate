@@ -86,6 +86,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td> <label for="edad">Introduce tu edad</label></td>
+                    <td> <input type="number" th:field="*{edad}"></td>
+                    <td> <!-- <strong th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></strong> -->
+                        <strong th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></strong>
+                    </td>
+                </tr>
+                <tr>
                     <td> <button type="submit">Registrar</button></td>
                 </tr>
             </table>
