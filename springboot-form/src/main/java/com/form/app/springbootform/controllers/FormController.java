@@ -3,16 +3,20 @@ package com.form.app.springbootform.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.form.app.springbootform.model.Usuario;
+import com.form.app.springbootform.validation.UserValidation;
 
 import jakarta.validation.Valid;
 
@@ -21,6 +25,24 @@ import jakarta.validation.Valid;
 @SessionAttributes("usuario")
 @RequestMapping("/v1/api")
 public class FormController {
+    /**
+     * Para validar con el validar nativo de spring Validator
+     * se establece un modelo de validador y se inyecta en el controlador.
+     * !!EN EL MODELO NO!!
+     */
+    // Inyectar el validador
+    @Autowired
+    private UserValidation userValidation;
+
+    // Otra forma de validar automaticamente con anotaciones
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        // Se establecer validar a initBinder
+        // webDataBinder.setValidator(userValidation);
+
+        // Agregar un nuevo validar y con eso no pierde las validaciones con anotaciones
+        // webDataBinder.addValidators(userValidation);
+    }
 
     // Pasar los datos a la vista y retornar la vista
     @GetMapping("/form")
@@ -35,6 +57,7 @@ public class FormController {
 
         // Datos formulario
         usuario.setId(1);
+
         // vista formulario
         return "form";
     }
@@ -51,6 +74,9 @@ public class FormController {
 
     public String submitForm(@Valid Usuario usuario, BindingResult bindingResul, Model model,
             SessionStatus sessionStatus) {
+
+        // Validar los campos en el controllador con Validador
+        // userValidation.validate(usuario, bindingResul);
         // Titulo pagina
         model.addAttribute("title", "Formulario con SpringBoot");
 
