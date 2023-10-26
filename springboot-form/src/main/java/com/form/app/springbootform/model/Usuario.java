@@ -1,80 +1,67 @@
 package com.form.app.springbootform.model;
 
+import com.form.app.springbootform.validation.Required;
+import com.form.app.springbootform.validation.ValidateUUID;
+
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 // Modelo de usuarios
+// Para etablabecer lombok se usa anotaciones
+
+// Genera un constructor sin argumento
+// @NoArgsConstructor
+
+// Genera un contructor con el nombre de cada campo de la clase usuario
+// @AllArgsConstructor
+
+@Getter
+@Setter
 public class Usuario {
 
     // Validacion de los campos con anotaciones @Anotacion
-
+    @ValidateUUID()
     private Integer id;
 
-    @NotEmpty()
+    // @NotEmpty()
+    // @NotBlank(message = "El campo no puede estar vacio")
+    @Required
     private String nombre;
 
-    @NotEmpty()
+    // @NotEmpty()
+    @Required
     private String apellido;
 
-    @NotEmpty()
+    // @NotEmpty()
+    // @NotBlank(message = "El campo no puede estar vacío")
+    @Required
     private String username;
 
-    @NotEmpty()
+    // @NotEmpty()
     @Size(message = "La contraseña debe tener minimo 6 caracteres", min = 6)
     private String password;
 
-    @NotEmpty()
+    // @NotEmpty()
     @Email
     private String email;
 
+    @Max(value = 65,message = "Debes tener maximo 65 años")
+    @Min(value = 18,message = "Debes tener minimo 18 años")
+    @NotNull(message = "Campo obligatorio")
+    private Integer edad;
+
     // Metodos getter y setter
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    /**
+     * Los metodos getter y setter son generados con lombok,
+     * es la magia de spring, con lombok se usan las anotaciones
+     * 
+     * @Getter y @Setter y con ellos a traves del usuario se puede
+     *         ir jugando con los valores
+     */
 }
