@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringbootFormApplication<springboot-form>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.form.app.springbootform.SpringbootFormApplication",
+            "projectName": "springboot-form",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
