@@ -1,0 +1,43 @@
+body {
+    margin: 0 auto;
+
+}
+
+body h1 {
+    text-align: center;
+}
+
+body form {
+    margin: 10rem auto 0 auto;
+    width: min(90%, 30rem);
+}
+
+body form button[type="submit"] {
+    margin: 5rem 40%;
+    padding: .5rem 1.5rem;
+    background-color: #347cbb;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+body form button[type="submit"]:hover{
+    background-color: #204c72;
+}
+
+body form fieldset legend{
+    background-color: #347cbb;
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-weight: 800;
+}
+
+/* Errores formulario */
+
+form table td strong {
+    color: red;
+    font-size: .9rem;
+}
