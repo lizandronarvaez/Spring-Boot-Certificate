@@ -7,29 +7,50 @@
   </head>
 
   <body>
-    <h2>Usuarios registrados</h2>
+    <h2 th:text="${registroUsuarios}"></h2>
     <hr />
     <div>
       <fieldset>
-        <legend><strong>Usuarios Registrados</strong></legend>
+        <legend><strong th:text="${registroUsuarios}"></strong></legend>
         <br />
         <table>
           <thead>
             <tr>
-              <th>Nº Usuario</th>
+              <!-- <th>Nº Usuario</th> -->
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Username</th>
               <th>Email</th>
+              <th>Fecha_Nacimiento</th>
+              <th>Id_Pais</th>
+              <th>Cod_Pais</th>
+              <th>Pais_Nacimiento</th>
+              <th>Tipo_Usuario</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><p th:text="${usuario.id}"></p></td>
+              <!-- <td><p th:text="${usuario.id}"></p></td> -->
               <td><p th:text="${usuario.nombre}"></p></td>
               <td><p th:text="${usuario.apellido}"></p></td>
               <td><p th:text="${usuario.username}"></p></td>
               <td><p th:text="${usuario.email}"></p></td>
+              <!-- Convetir la fecha a  -->
+              <td>
+                <p
+                  th:text="${#dates.format(usuario.fechaNacimiento,'dd/MM/yyyy')}"
+                ></p>
+              </td>
+              <td><p th:text="${usuario.pais.id}"></p></td>
+              <td><p th:text="${usuario.pais.codigo}"></p></td>
+              <td><p th:text="${usuario.pais.nombre}"></p></td>
+
+              <!-- rol usuario -->
+              <td>
+                <ul>
+                  <li th:each="rol:${usuario.roles}" th:text="${rol}"></li>
+                </ul>
+              </td>
             </tr>
           </tbody>
         </table>
