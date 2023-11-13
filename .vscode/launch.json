@@ -2,6 +2,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SecurityConfiguration",
+            "request": "launch",
+            "mainClass": "com.demosecurity.demo.security.config.SecurityConfiguration",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.demosecurity.demo.DemoApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SpringbootFormApplication<springboot-form>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
