@@ -1,32 +1,33 @@
 package com.form.app.springbootform.model;
 
+import java.util.Date;
+import java.util.List;
 import com.form.app.springbootform.validation.Required;
-import com.form.app.springbootform.validation.ValidateUUID;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // Modelo de usuarios
 // Para etablabecer lombok se usa anotaciones
-
 // Genera un constructor sin argumento
 // @NoArgsConstructor
-
 // Genera un contructor con el nombre de cada campo de la clase usuario
 // @AllArgsConstructor
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Usuario {
 
     // Validacion de los campos con anotaciones @Anotacion
-    @ValidateUUID()
+    // @ValidateUUID()
     private Integer id;
 
     // @NotEmpty()
@@ -44,24 +45,32 @@ public class Usuario {
     private String username;
 
     // @NotEmpty()
-    @Size(message = "La contraseña debe tener minimo 6 caracteres", min = 6)
+    @Size(min = 6)
     private String password;
 
-    // @NotEmpty()
+    @Required
     @Email
     private String email;
 
-    @Max(value = 65,message = "Debes tener maximo 65 años")
-    @Min(value = 18,message = "Debes tener minimo 18 años")
-    @NotNull(message = "Campo obligatorio")
+    @Max(value = 65)
+    @Min(value = 18)
+    @NotNull()
     private Integer edad;
 
-    // Metodos getter y setter
-    /**
-     * Los metodos getter y setter son generados con lombok,
-     * es la magia de spring, con lombok se usan las anotaciones
-     * 
-     * @Getter y @Setter y con ellos a traves del usuario se puede
-     *         ir jugando con los valores
-     */
+    // Validar fechas
+    // Formato para almacenar en BD con input date
+    // @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    @Past
+    private Date fechaNacimiento;
+
+    // Esta anotacion valida objetos relacionados
+    // @Valid
+    @NotNull
+    private Pais pais;
+
+    // Roles
+    @NotEmpty
+    private List<Role> roles;
+
 }
