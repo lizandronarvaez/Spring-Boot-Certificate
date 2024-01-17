@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "config.hour.open",
+    "type": "java.lang.String",
+    "description": "A description for 'config.hour.open'"
+  },
+  {
+    "name": "config.hour.close",
+    "type": "java.lang.String",
+    "description": "A description for 'config.hour.close'"
+  }
+]}
