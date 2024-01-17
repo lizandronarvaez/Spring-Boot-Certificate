@@ -2,6 +2,54 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SpringbootJpaApplication",
+            "request": "launch",
+            "mainClass": "com.springboot.springbootjpa.SpringbootJpaApplication",
+            "projectName": "springboot-jpa"
+        },
+        {
+            "type": "java",
+            "name": "AopProgramacionOrientadaAspectoApplication",
+            "request": "launch",
+            "mainClass": "com.springboot.aopprogramacionorientadaaspecto.AopProgramacionOrientadaAspectoApplication",
+            "projectName": "aop-programacion-orientada-aspecto"
+        },
+        {
+            "type": "java",
+            "name": "HorarioClientesApplication",
+            "request": "launch",
+            "mainClass": "com.springboot.horario_clientes.HorarioClientesApplication",
+            "projectName": "horario_clientes"
+        },
+        {
+            "type": "java",
+            "name": "InterceptorsApplication",
+            "request": "launch",
+            "mainClass": "com.springboot.interceptors.InterceptorsApplication",
+            "projectName": "interceptors"
+        },
+        {
+            "type": "java",
+            "name": "ExcepcionesApplication",
+            "request": "launch",
+            "mainClass": "com.springbootexcepciones.ExcepcionesApplication",
+            "projectName": "Excepciones"
+        },
+        {
+            "type": "java",
+            "name": "FacturaApplication",
+            "request": "launch",
+            "mainClass": "com.springbootfactura.FacturaApplication"
+        },
+        {
+            "type": "java",
+            "name": "SpringBootWebApplication",
+            "request": "launch",
+            "mainClass": "com.bolsadeideas.springboot.app.springbootweb.SpringBootWebApplication",
+            "projectName": "spring-boot-web"
+        },
+        {
+            "type": "java",
             "name": "SecurityConfiguration",
             "request": "launch",
             "mainClass": "com.demosecurity.demo.security.config.SecurityConfiguration",
