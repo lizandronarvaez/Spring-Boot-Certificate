@@ -14,8 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// Modelo de usuarios
-// Para etablabecer lombok se usa anotaciones
 // Genera un constructor sin argumento
 // @NoArgsConstructor
 // Genera un contructor con el nombre de cada campo de la clase usuario
@@ -31,24 +29,19 @@ public class Usuario {
     private Integer id;
 
     // @NotEmpty()
-    // @NotBlank(message = "El campo no puede estar vacio")
-    @Required
     private String nombre;
 
     // @NotEmpty()
-    @Required
     private String apellido;
 
     // @NotEmpty()
-    // @NotBlank(message = "El campo no puede estar vacío")
-    @Required
     private String username;
 
     // @NotEmpty()
     @Size(min = 6)
+    @Required
     private String password;
 
-    @Required
     @Email
     private String email;
 
@@ -72,5 +65,8 @@ public class Usuario {
     // Roles
     @NotEmpty
     private List<Role> roles;
+
+    @NotEmpty
+    private String genero;
 
 }

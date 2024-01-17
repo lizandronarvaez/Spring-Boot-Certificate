@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -141,7 +142,18 @@ public class FormController {
     // Roles con un objeto rol
     @ModelAttribute("listaRolesObject")
     public List<Role> listaRolesObject() {
-        return this.roleService.findAll();
+        return roleService.findAll();
+    }
+
+    // Generos
+    @ModelAttribute("listaGeneros")
+    public List<String> generos() {
+
+        List<String> generos = new ArrayList<>();
+        generos.add("Hombre");
+        generos.add("Mujer");
+
+        return generos;
     }
 
     // Pasar los datos a la vista y retornar la vista
@@ -172,16 +184,15 @@ public class FormController {
     // y para validar los campos en el backend se usa bindingresult despues del
     // objeto que queremos validar
 
-    public String submitForm(@Valid Usuario usuario, BindingResult bindingResul, Model model,
-            SessionStatus sessionStatus) {
+    public String submitForm(@Valid Usuario usuario, BindingResult bindingResul, Model model) {
 
         // Validar los campos en el controllador con Validador
         // userValidation.validate(usuario, bindingResul);
         // Titulo pagina
-        model.addAttribute("title", "Formulario con SpringBoot");
-        model.addAttribute("registroUsuarios", "Usuarios Registrados");
         // condicional
         if (bindingResul.hasErrors()) {
+            model.addAttribute("title", "Formulario con SpringBoot");
+            model.addAttribute("registroUsuarios", "Usuarios Registrados");
             // // Se crear un hasmap
             // Map<String, String> errores = new HashMap<>();
 
@@ -195,6 +206,21 @@ public class FormController {
 
         // Datos del formulario
         model.addAttribute("usuario", usuario);
+
+        return "redirect:/v1/api/ver";
+    }
+
+    @GetMapping("/ver")
+    public String redirect(@SessionAttribute(name = "usuario", required = false) Usuario usuario, Model model,
+            SessionStatus sessionStatus) {
+
+        // Prevenir actualizar el formulario nos redirige a otra pagina
+        if (usuario == null) {
+            return "redirect:/v1/api/form";
+        }
+        model.addAttribute("title", "Formulario con SpringBoot");
+        model.addAttribute("registroUsuarios", "Usuarios Registrados");
+
         // Se usa sesion status para persitir el dato y que no se borre
         sessionStatus.setComplete();
 
