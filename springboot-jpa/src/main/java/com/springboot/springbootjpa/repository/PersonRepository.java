@@ -11,6 +11,7 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     // Son consultas personalizadas en funcion de los atributos
     /* LISTAS */
+    
     List<Person> findByProgrammingLanguage(String programmingLanguage);
 
     List<Person> findByProgrammingLanguageAndName(String programmingLanguage, String name);
@@ -33,4 +34,15 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     // Buscar por Like
     Optional<Person> findByNameContaining(String name);
 
+    // Buscar por el nombre
+    @Query("SELECT p.name FROM Person p WHERE p.id=?1")
+    String getByIdPersonalize(Long id);
+
+    // Buscar lista de objetos
+    @Query("SELECT p.name,p.lastname,p.programmingLanguage FROM Person p")
+    List<Object[]> findAllMixPersonDataList();
+
+    // Lista de personas
+    @Query("SELECT new Person(p.name,p.lastname) FROM Person p")
+    List<Person> findAllClassPerson();
 }
