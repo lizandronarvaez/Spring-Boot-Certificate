@@ -7,6 +7,8 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springboot.springbootjpa.dto.PersonDto;
+import com.springboot.springbootjpa.entities.Audit;
 import com.springboot.springbootjpa.entities.Person;
 import com.springboot.springbootjpa.repository.PersonRepository;
 
@@ -31,7 +33,37 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// update();
 		// deleteById();
 		// getByIdPersonalize();
-		consultPersonalize2();
+		// consultPersonalize2();
+		// consultPersonalizeDto();
+		// consultAllNames();
+		// consultAllProgramming();
+	}
+
+	@Transactional(readOnly = true)
+	public void consultAllProgramming() {
+		System.out.println("Lista de lenguajes de programacion");
+		System.out.println();
+		List<String> personListDto = this.personRepository.findAllLanguagesDisticnt();
+		personListDto.forEach(System.out::println);
+
+	}
+
+	@Transactional(readOnly = true)
+	public void consultAllNames() {
+		System.out.println("Lista de usuarios");
+		System.out.println();
+		List<String> personListDto = this.personRepository.findAllNames();
+		personListDto.forEach(System.out::println);
+
+	}
+
+	@Transactional(readOnly = true)
+	public void consultPersonalizeDto() {
+		System.out.println("Lista de usuarios");
+
+		List<PersonDto> personListDto = this.personRepository.findAllClassPersonDto();
+		personListDto.forEach(System.out::println);
+
 	}
 
 	@Transactional(readOnly = true)
@@ -148,9 +180,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// .findOneName("Josefa")
 		// .ifPresent(System.out::println);
 
-		this.personRepository
-				.findByNameContaining("p")
-				.ifPresent(System.out::println);
+		this.personRepository.findByNameContaining("p").ifPresent(System.out::println);
 	}
 
 	@Transactional
@@ -163,11 +193,19 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("Introduce un lenguaje de programación");
 		String programmingLanguaje = scanner.next();
 		scanner.close();
-		// crear una nueva persona
-		Person person = new Person(null, name, lastname, programmingLanguaje);
+		// crear una nueva persona con builder
+		Person person = Person.builder()
+				.name(name)
+				.lastname(lastname)
+				.programmingLanguage(programmingLanguaje)
+				.audit(new Audit())
+				.build();
+
 		// Guardar una nueva persona
 		Person personSave = this.personRepository.save(person);
+		// Imprimir
 		log.info("Persona nueva registrada: {}", personSave);
-		this.personRepository.findById(personSave.getId()).ifPresent((p) -> System.out.println(p));
+		// Buscar y mostrar el datoguardado
+		this.personRepository.findById(personSave.getId()).ifPresent(System.out::println);
 	}
 }
