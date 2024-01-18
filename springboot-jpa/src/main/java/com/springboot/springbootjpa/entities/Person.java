@@ -3,8 +3,9 @@ package com.springboot.springbootjpa.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name = "persons")
@@ -24,4 +25,6 @@ public class Person {
     @Column(name = "programming_language")
     private String programmingLanguage;
 
+    @Embedded
+    private Audit audit;
 }
