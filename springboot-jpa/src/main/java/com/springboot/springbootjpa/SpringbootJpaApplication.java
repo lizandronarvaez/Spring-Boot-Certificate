@@ -1,17 +1,18 @@
 package com.springboot.springbootjpa;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.springbootjpa.entities.Person;
 import com.springboot.springbootjpa.repository.PersonRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootApplication
 public class SpringbootJpaApplication implements CommandLineRunner {
 
@@ -26,7 +27,80 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// list();
 		// findById();
-		create();
+		// create();
+		// update();
+		// deleteById();
+		// getByIdPersonalize();
+		consultPersonalize2();
+	}
+
+	@Transactional(readOnly = true)
+	public void consultPersonalize2() {
+		System.out.println("Lista de usuarios");
+
+		List<Person> personList = this.personRepository.findAllClassPerson();
+		personList.forEach(person -> System.out
+				.println(person.getName().toUpperCase() + " " + person.getLastname().toUpperCase()));
+	}
+
+	@Transactional(readOnly = true)
+	public void consultPersonalize() {
+		System.out.println("Lista de usuarios");
+
+		List<Object[]> personList = this.personRepository.findAllMixPersonDataList();
+		personList.forEach(person -> System.out.println(person[0] + " " + person[1] + " " + person[2]));
+	}
+
+	@Transactional(readOnly = true)
+	public void getByIdPersonalize() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id del usuario: ");
+		Long idPerson = scanner.nextLong();
+		scanner.close();
+		String person = this.personRepository.getByIdPersonalize(idPerson);
+
+		System.out.println("Usuario con el id: " + idPerson + " es " + person);
+	}
+
+	@Transactional
+	public void deleteById() {
+		Scanner scanner = new Scanner(System.in);
+		// MOSTRAMOS TODOS
+		this.personRepository.findAll().forEach(System.out::println);
+		System.out.println("Ingrese el id a eliminar: ");
+
+		Long personId = scanner.nextLong();
+		scanner.close();
+		// Buscamos primero que exista el dato
+		Optional<Person> person = this.personRepository.findById(personId);
+		// Validamos
+		person.ifPresentOrElse(p -> {
+			this.personRepository.deleteById(p.getId());
+			System.out.println("¡Eliminado con éxito!");
+		}, () -> System.out.println("No existe el usuario"));
+	}
+
+	@Transactional
+	public void update() {
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Ingrese el id de el usuario: ");
+		Long idPerson = scanner.nextLong();
+
+		Optional<Person> personOld = this.personRepository.findById(idPerson);
+		// personOld.ifPresent(person -> {
+		if (personOld.isPresent()) {
+			Person person = personOld.orElseThrow();
+			System.out.println(person);
+			System.out.println("Ingrese los nuevos datos: ");
+			String newLanguaje = scanner.next();
+			person.setProgrammingLanguage(newLanguaje);
+			Person personNew = this.personRepository.save(person);
+			log.info("Datos actualizados de la nueva persona: {}" + personNew);
+			scanner.close();
+		} else {
+			System.out.println("¡El usuario no existe!");
+		}
 	}
 
 	public void list() {
@@ -49,6 +123,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("****    FIN CONSULTA    ****");
 	}
 
+	@Transactional(readOnly = true)
 	public void findById() {
 
 		// Optional<Person> person = this.personRepository.findById(1L);
@@ -78,10 +153,21 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 				.ifPresent(System.out::println);
 	}
 
+	@Transactional
 	public void create() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Introduce un nombre: ");
+		String name = scanner.next();
+		System.out.println("Introduce un apellido: ");
+		String lastname = scanner.next();
+		System.out.println("Introduce un lenguaje de programación");
+		String programmingLanguaje = scanner.next();
+		scanner.close();
 		// crear una nueva persona
-		Person person = new Person(null, "Lizandro", "Narváez", "Java-SpringBoot");
+		Person person = new Person(null, name, lastname, programmingLanguaje);
 		// Guardar una nueva persona
-		this.personRepository.save(person);
+		Person personSave = this.personRepository.save(person);
+		log.info("Persona nueva registrada: {}", personSave);
+		this.personRepository.findById(personSave.getId()).ifPresent((p) -> System.out.println(p));
 	}
 }
