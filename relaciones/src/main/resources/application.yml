@@ -1,0 +1,23 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: RelacionesJPA
+  # Conexion con la base de datos
+  datasource:
+    url: jdbc:mysql://localhost:3306/relaciones_springboot
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #Configuracion con la base de datos
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    # show-sql: true
+    hibernate:
+      ddl-auto: update
+      
+    # ¡Solo para desarrollo!
+    # hibernate:
+    #   ddl-auto: create
+    #fin solo para desarrollo
